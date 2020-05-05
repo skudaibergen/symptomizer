@@ -20,7 +20,7 @@ function Header() {
                             {/*  Navbar Brand  */}
                             <a href="#" className="navbar-brand d-none d-sm-inline-block">
                                 <div className="brand-text d-none d-lg-inline-block">
-                                    <span>Bootstrap </span><strong>Dashboard</strong>
+                                    <span>Symptom </span><strong>Analyzer</strong>
                                 </div>
                                 <div className="brand-text d-none d-sm-inline-block d-lg-none">
                                     <strong>BD</strong>

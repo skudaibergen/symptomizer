@@ -10,7 +10,7 @@ function Sidebar() {
                 </div>
                 <div className="title">
                     <h1 className="h4">Mark Stephen</h1>
-                    <p>Web Designer</p>
+                    <p>Medicine Doctor</p>
                 </div>
             </div>
             {/* Sidebar Navigation Menus */}
