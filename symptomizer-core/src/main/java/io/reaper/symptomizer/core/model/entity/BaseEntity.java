@@ -21,6 +21,6 @@ public abstract class BaseEntity {
     protected Long id;
 
     @Column(name = "_created_at", nullable = false)
-    protected Date createdAt;
+    protected Date createdAt = new Date();
 
 }

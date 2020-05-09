@@ -14,8 +14,12 @@ public interface CrudService<T> {
 
     T save(T entity);
 
+    List<T> save(List<T> entities);
+
     T update(T entity);
 
     void delete(Long id);
+
+    void deleteAll();
 
 }
