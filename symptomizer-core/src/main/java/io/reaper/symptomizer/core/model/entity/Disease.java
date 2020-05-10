@@ -1,5 +1,6 @@
 package io.reaper.symptomizer.core.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
 import javax.persistence.Column;
@@ -17,6 +18,7 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Disease extends BaseEntity {
 
     @Column(name = "_code", nullable = false)

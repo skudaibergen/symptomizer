@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  *
@@ -36,7 +37,8 @@ public class DiseaseServiceImpl implements CrudService<Disease>, ImportService {
 
     @Override
     public Disease findOne(Long id) {
-        return diseaseRepo.getOne(id);
+        return diseaseRepo.findById(id).orElse(new Disease());
+
     }
 
     @Override

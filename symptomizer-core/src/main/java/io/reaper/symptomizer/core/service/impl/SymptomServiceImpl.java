@@ -36,7 +36,7 @@ public class SymptomServiceImpl implements CrudService<Symptom>, ImportService {
 
     @Override
     public Symptom findOne(Long id) {
-        return symptomRepo.getOne(id);
+        return symptomRepo.findById(id).orElse(new Symptom());
     }
 
     @Override
