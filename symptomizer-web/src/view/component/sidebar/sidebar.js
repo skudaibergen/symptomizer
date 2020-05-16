@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from "react-router-dom";
+
 
 function Sidebar() {
     return (
@@ -17,9 +19,10 @@ function Sidebar() {
             <span className="heading">Main</span>
             <ul className="list-unstyled">
                 <li className="active">
-                    <a href="#">
-                        <i className="icon-home" />Home
-                    </a>
+                    <Link to="/"><i className="icon-home" />Home</Link>
+                </li>
+                <li>
+                    <Link to="/diagnostics"><i className="icon-flask" />Diagnostics</Link>
                 </li>
             </ul>
             {/*<span className="heading">Extras</span>*/}

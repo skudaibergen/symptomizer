@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Header() {
     return (
@@ -18,14 +19,14 @@ function Header() {
                         {/*  Navbar Header  */}
                         <div className="navbar-header">
                             {/*  Navbar Brand  */}
-                            <a href="#" className="navbar-brand d-none d-sm-inline-block">
+                            <Link to="/" className="navbar-brand d-none d-sm-inline-block">
                                 <div className="brand-text d-none d-lg-inline-block">
                                     <span>Symptom </span><strong>Analyzer</strong>
                                 </div>
                                 <div className="brand-text d-none d-sm-inline-block d-lg-none">
                                     <strong>BD</strong>
                                 </div>
-                            </a>
+                            </Link>
                             {/*  Toggle Button  */}
                             <a id="toggle-btn" href="#" className="menu-btn active">
                                 <span/><span/><span/>

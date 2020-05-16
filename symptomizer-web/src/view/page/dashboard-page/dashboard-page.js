@@ -19,7 +19,7 @@ class DashboardPage extends React.Component {
 
 
                     <div className="content-inner">
-                        <InnerHeader />
+                        <InnerHeader title={'Dashboard'}/>
                         <Footer />
                     </div>
                 </div>

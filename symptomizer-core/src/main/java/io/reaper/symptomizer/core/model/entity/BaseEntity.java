@@ -1,6 +1,7 @@
 package io.reaper.symptomizer.core.model.entity;
 
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.ToString;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import java.util.Date;
  *
  * @author Sanzhar Kudaibergen
  */
+@Getter
 @ToString
 @EqualsAndHashCode
 @MappedSuperclass

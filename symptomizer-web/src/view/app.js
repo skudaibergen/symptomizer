@@ -10,11 +10,13 @@ import './style/font-awesome.min.css'
 
 import DashboardPage from './page/dashboard-page';
 import LoginPage     from './page/login-page/login-page';
+import DiagnosticsPage from './page/diagnostics-page/diagnostics-page';
 
 function App() {
     return (
         <div id="app">
             <Route exact path="/" component={DashboardPage}/>
+            <Route exact path="/diagnostics" component={DiagnosticsPage}/>
             <Route exact path="/login" component={LoginPage}/>
         </div>
     );
