@@ -100,7 +100,7 @@ class DiagnosticsContainer extends React.Component{
                                 </div>
                                 {   predictionResult ?
                                     <div className="card-body">
-                                        <DiagnosticsResultCard />
+                                        <DiagnosticsResultCard predictionResult={predictionResult} />
                                     </div> :
                                     <div className="card-body">
                                         {   currentStep === 0 ?
@@ -143,26 +143,24 @@ class DiagnosticsContainer extends React.Component{
                                                     </div>
                                                 </div> :
 
-                                                currentStep === 2 ?
-                                                    <DiagnosticsSymptomsInput symptomsMap={symptomsMap}
-                                                                              addSymptom={this.addSymptom} /> :
+                                            currentStep === 2 ?
+                                                <DiagnosticsSymptomsInput symptomsMap={symptomsMap}
+                                                                          addSymptom={this.addSymptom} /> :
 
-                                                    currentStep === 3 ?
-                                                        <DiagnosticsQuestionsInput question={'The question here'}/> :
-                                                        null
+                                            currentStep === 3 ?
+                                                <DiagnosticsQuestionsInput question={'The question here'}/> :
+                                                null
                                         }
 
                                         <div className="row form-group d-flex justify-content-end mr-2">
                                             <div className="">
                                                 {   currentStep !== 0 &&
-                                                <button onClick={this.goBack} type="button" className="btn btn-secondary mr-2">Back</button>
+                                                    <button onClick={this.goBack} type="button" className="btn btn-secondary mr-2">Back</button>
                                                 }
-                                                {
-                                                    currentStep !== stepNum - 1 &&
+                                                {   currentStep !== stepNum - 1 &&
                                                     <button onClick={this.goNext} type="button" className="btn btn-primary">Next</button>
                                                 }
-                                                {
-                                                    currentStep === stepNum - 1 &&
+                                                {   currentStep === stepNum - 1 &&
                                                     <button onClick={this.submit} type="button" className="btn btn-primary">Finish</button>
                                                 }
                                             </div>
