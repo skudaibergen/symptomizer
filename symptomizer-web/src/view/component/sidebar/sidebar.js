@@ -1,8 +1,12 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import {
+    APP_ROUTE_DASHBOARD_PAGE,
+    APP_ROUTE_DIAGNOSTICS_PAGE
+} from '../../../core/constants';
 
+function Sidebar({ location }) {
 
-function Sidebar() {
     return (
         <nav className="side-navbar">
             {/* Sidebar Header */}
@@ -18,10 +22,10 @@ function Sidebar() {
             {/* Sidebar Navigation Menus */}
             <span className="heading">Main</span>
             <ul className="list-unstyled">
-                <li className="active">
+                <li className={location.pathname === APP_ROUTE_DASHBOARD_PAGE ? 'active' : ''}>
                     <Link to="/"><i className="icon-home" />Home</Link>
                 </li>
-                <li>
+                <li className={location.pathname === APP_ROUTE_DIAGNOSTICS_PAGE ? 'active' : ''}>
                     <Link to="/diagnostics"><i className="icon-flask" />Diagnostics</Link>
                 </li>
             </ul>

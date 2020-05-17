@@ -15,8 +15,7 @@ class DashboardPage extends React.Component {
                 <Header />
 
                 <div className="page-content d-flex align-items-stretch">
-                    <Sidebar />
-
+                    <Sidebar location={this.props.location}/>
 
                     <div className="content-inner">
                         <InnerHeader title={'Dashboard'}/>

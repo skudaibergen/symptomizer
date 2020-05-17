@@ -7,17 +7,22 @@ import './style/style.default.css';
 import './style/fontastic.css';
 import './style/font-awesome.min.css'
 
-
 import DashboardPage from './page/dashboard-page';
 import LoginPage     from './page/login-page/login-page';
 import DiagnosticsPage from './page/diagnostics-page/diagnostics-page';
+import {
+    APP_ROUTE_DASHBOARD_PAGE,
+    APP_ROUTE_DIAGNOSTICS_PAGE,
+    APP_ROUTE_LOGIN_PAGE
+} from "../core/constants";
+
 
 function App() {
     return (
         <div id="app">
-            <Route exact path="/" component={DashboardPage}/>
-            <Route exact path="/diagnostics" component={DiagnosticsPage}/>
-            <Route exact path="/login" component={LoginPage}/>
+            <Route exact path={APP_ROUTE_DASHBOARD_PAGE} component={DashboardPage}/>
+            <Route exact path={APP_ROUTE_DIAGNOSTICS_PAGE} component={DiagnosticsPage}/>
+            <Route exact path={APP_ROUTE_LOGIN_PAGE} component={LoginPage}/>
         </div>
     );
 }

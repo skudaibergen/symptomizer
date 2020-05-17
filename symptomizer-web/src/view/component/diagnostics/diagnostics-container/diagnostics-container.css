@@ -1,0 +1,13 @@
+.sex-input-button {
+    width: 8rem;
+    height: 10rem;
+    border: 1px solid #c0c0c0;
+    border-radius: 5px;
+    text-align: center;
+    margin: 0.6rem;
+}
+
+.sex-input-button:hover {
+    cursor: pointer;
+    background: #c0c0c0;
+}

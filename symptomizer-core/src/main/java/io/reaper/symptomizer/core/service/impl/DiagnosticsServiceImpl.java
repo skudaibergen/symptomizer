@@ -21,6 +21,7 @@ public class DiagnosticsServiceImpl implements DiagnosticsService {
 
     @Override
     public DiagnosisDto predict(AnamnesisDto anamnesis) {
+        log.info("Predicting by anamnesis: {}", anamnesis);
         return DiagnosisDto.builder()
                 .predictedDisease(diseaseRepo.findById(1L).get())
                 .build();
