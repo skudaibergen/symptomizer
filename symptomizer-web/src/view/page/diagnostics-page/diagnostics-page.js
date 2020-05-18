@@ -16,20 +16,16 @@ class DiagnosticsPage extends React.Component {
 
         this.state = {
             symptomsMap: null,
+            symptomQuestions: null,
             predictionResult: null,
-            loading: false
+            loading: true
         };
     }
 
     componentDidMount() {
-        api.fetchSymptoms()
-            .then(res => res.data)
-            .then(body => {
-                if (body.status === 'success') return body.data;
-                else throw new Error(`Api status was ${body.status}`);
-            })
-            .then(symptomsMap => this.setState({ symptomsMap }))
-            .catch(err => console.error(err));
+        this.getSymptoms()
+            .then(this.getQuestions())
+            .then(this.setState({ loading: false }));
     }
 
     submit = anamnesis => {
@@ -44,8 +40,30 @@ class DiagnosticsPage extends React.Component {
             .catch(err => console.error(err));
     };
 
+    getQuestions = () => {
+        return api.fetchQuestions()
+            .then(res => res.data)
+            .then(body => {
+                if (body.status === 'success') return body.data;
+                else throw new Error(`Api status was ${body.status}`);
+            })
+            .then(symptomQuestions => this.setState({ symptomQuestions }))
+            .catch(err => console.error(err));
+    };
+
+    getSymptoms = () => {
+        return api.fetchSymptoms()
+            .then(res => res.data)
+            .then(body => {
+                if (body.status === 'success') return body.data;
+                else throw new Error(`Api status was ${body.status}`);
+            })
+            .then(symptomsMap => this.setState({ symptomsMap }))
+            .catch(err => console.error(err));
+    };
+
     render() {
-        const { symptomsMap, predictionResult, loading } = this.state;
+        const { symptomsMap, predictionResult, loading, symptomQuestions } = this.state;
 
         return (
             <div className="page">
@@ -61,6 +79,7 @@ class DiagnosticsPage extends React.Component {
                             <LoaderMaterial className="mt-5" loading={loading}/> :
                             <DiagnosticsContainer submit={this.submit}
                                                   symptomsMap={symptomsMap}
+                                                  symptomQuestions={symptomQuestions}
                                                   predictionResult={predictionResult} />
                         }
                         <Footer />

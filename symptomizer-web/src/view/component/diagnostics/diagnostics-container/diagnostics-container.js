@@ -2,9 +2,9 @@ import React from "react";
 
 import DiagnosticsSymptomsInput from "../diagnostics-symptoms-input/diagnostics-symptoms-input";
 import DiagnosticsQuestionsInput from "../diagnostics-questions-input/diagnostics-questions-input";
+import DiagnosticsResultCard from "../diagnostics-result-card/diagnostics-result-card";
 
 import './diagnostics-container.css'
-import DiagnosticsResultCard from "../diagnostics-result-card/diagnostics-result-card";
 
 
 class DiagnosticsContainer extends React.Component{
@@ -14,11 +14,18 @@ class DiagnosticsContainer extends React.Component{
 
         this.state = {
             anamnesis: {
+                sex: '',
+                age: 0,
                 symptomIds: [],
                 symptomCodes: [],
             },
             currentStep: 0,
-            stepNum: 4
+            stepNum: 3 + 1 // TODO: Questions length from state
+                // + (this.props.symptomQuestions && this.props.symptomQuestions.length ?
+                // this.props.symptomQuestions.length :
+                // 0)
+            ,
+            isQuestion: false
         }
     }
 
@@ -34,8 +41,10 @@ class DiagnosticsContainer extends React.Component{
 
         if (currentStep !== this.state.stepNum - 1) {
             currentStep++;
+            let isQuestion = currentStep === 1 || currentStep >= 3;
             this.setState({
-                currentStep
+                currentStep,
+                isQuestion
             })
         }
     };
@@ -45,8 +54,10 @@ class DiagnosticsContainer extends React.Component{
 
         if (currentStep !== 0) {
             currentStep--;
+            let isQuestion = currentStep === 1 || currentStep >= 3;
             this.setState({
-                currentStep
+                currentStep,
+                isQuestion
             })
         }
     };
@@ -70,9 +81,28 @@ class DiagnosticsContainer extends React.Component{
         }
     };
 
+    changeSex = (sex) => {
+        if (sex) {
+            const anamnesis = this.state.anamnesis;
+            let newAnamnesis = { ...anamnesis, sex };
+            this.setState({ anamnesis: newAnamnesis });
+            this.goNext();
+        }
+    };
+
+    answerQuestion = (answer) => {
+        if (answer) {
+            let currentStep = this.state.currentStep;
+
+            // switch (answer) {}
+
+            currentStep !== this.state.stepNum - 1 ? this.goNext() : this.submit();
+        }
+    };
+
     render() {
-        const { currentStep, stepNum } = this.state;
-        const { symptomsMap, predictionResult } = this.props;
+        const { currentStep, stepNum, isQuestion } = this.state;
+        const { symptomsMap, symptomQuestions, predictionResult } = this.props;
 
         return (
             <section className="">
@@ -132,13 +162,13 @@ class DiagnosticsContainer extends React.Component{
 
                                                     <div className="mt-4 mb-4 pt-4 pb-4 d-flex justify-content-center">
                                                         <div className="d-flex flex-row">
-                                                            <button className="sex-input-button">
+                                                            <button onClick={() => this.changeSex('FEMALE')} className="sex-input-button">
                                                                 <i className="fa fa-5x fa-female mt-2 pt-2" />
                                                                 <br/>
                                                                 <span className="mt-4 pb-2">Female</span>
                                                             </button>
 
-                                                            <button className="sex-input-button">
+                                                            <button onClick={() => this.changeSex('MALE')} className="sex-input-button">
                                                                 <i className="fa fa-5x fa-male mt-2 pt-2" />
                                                                 <br/>
                                                                 <span className="mt-4 pb-2">Male</span>
@@ -151,24 +181,27 @@ class DiagnosticsContainer extends React.Component{
                                                 <DiagnosticsSymptomsInput symptomsMap={symptomsMap}
                                                                           addSymptom={this.addSymptom} /> :
 
-                                            currentStep === 3 ?
-                                                <DiagnosticsQuestionsInput question={'The question here'}/> :
+                                            currentStep >= 3 ?  //  FIXME: Does not work
+                                                symptomQuestions.map((question, idx) =>
+                                                    <DiagnosticsQuestionsInput key={'question-' + idx} question={question.name} answerQuestion={this.answerQuestion} />) :
                                                 null
                                         }
+
 
                                         <div className="row form-group d-flex justify-content-end mr-2">
                                             <div className="">
                                                 {   currentStep !== 0 &&
-                                                    <button onClick={this.goBack} type="button" className="btn btn-secondary mr-2">Back</button>
+                                                <button onClick={this.goBack} type="button" className="btn btn-secondary mr-2">Back</button>
                                                 }
-                                                {   currentStep !== stepNum - 1 &&
-                                                    <button onClick={this.goNext} type="button" className="btn btn-primary">Next</button>
+                                                {   !isQuestion && currentStep !== stepNum - 1 &&
+                                                <button onClick={this.goNext} type="button" className="btn btn-primary">Next</button>
                                                 }
-                                                {   currentStep === stepNum - 1 &&
-                                                    <button onClick={this.submit} type="button" className="btn btn-primary">Finish</button>
+                                                {   !isQuestion && currentStep === stepNum - 1 &&
+                                                <button onClick={this.submit} type="button" className="btn btn-primary">Finish</button>
                                                 }
                                             </div>
                                         </div>
+
                                     </div>
                                 }
                             </div>
