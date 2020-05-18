@@ -6,6 +6,7 @@ from tornado.ioloop import IOLoop
 
 from symptom_analyzer import SymptomAnalyzer
 
+
 class MainHandler(RequestHandler):
     def data_received(self, chunk):
         pass
@@ -26,7 +27,7 @@ class DiseasePredictionHandler(RequestHandler):
             self.write({
                 'status': 'success',
                 'data': {
-                    'prediction': {
+                    'predictedDisease': {
                         'code': prediction
                     }
                 }

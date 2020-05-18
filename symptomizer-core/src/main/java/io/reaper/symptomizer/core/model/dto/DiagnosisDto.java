@@ -2,8 +2,10 @@ package io.reaper.symptomizer.core.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.reaper.symptomizer.core.model.entity.Disease;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  *
@@ -11,6 +13,8 @@ import lombok.Data;
  */
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class DiagnosisDto {
 

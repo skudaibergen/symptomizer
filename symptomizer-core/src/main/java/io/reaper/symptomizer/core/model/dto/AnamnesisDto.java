@@ -25,5 +25,6 @@ public class AnamnesisDto {
     private Sex sex;
     private List<Symptom> symptoms;
     private List<Long> symptomIds;
+    private List<String> symptomCodes;
 
 }

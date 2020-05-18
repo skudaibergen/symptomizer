@@ -8,4 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author Sanzhar Kudaibergen
  */
 public interface DiseaseRepo extends JpaRepository<Disease, Long> {
+
+    Disease findByCode(String code);
+
 }

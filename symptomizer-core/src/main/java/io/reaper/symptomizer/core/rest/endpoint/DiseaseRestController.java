@@ -1,4 +1,4 @@
-package io.reaper.symptomizer.core.rest;
+package io.reaper.symptomizer.core.rest.endpoint;
 
 import io.reaper.symptomizer.core.model.dto.ResponseDto;
 import io.reaper.symptomizer.core.model.entity.Disease;

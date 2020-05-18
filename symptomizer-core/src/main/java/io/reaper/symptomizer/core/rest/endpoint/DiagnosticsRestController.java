@@ -1,4 +1,4 @@
-package io.reaper.symptomizer.core.rest;
+package io.reaper.symptomizer.core.rest.endpoint;
 
 import io.reaper.symptomizer.core.model.dto.AnamnesisDto;
 import io.reaper.symptomizer.core.model.dto.ResponseDto;
@@ -22,7 +22,7 @@ public class DiagnosticsRestController {
     private final DiagnosticsService diagnosticsService;
 
     @PostMapping("")
-    public ResponseEntity<ResponseDto<?>> predict(@RequestBody AnamnesisDto anamnesisDto) {
+    public ResponseEntity<ResponseDto<?>> predict(@RequestBody AnamnesisDto anamnesisDto) throws Exception {
         return ResponseEntity.ok(ResponseDto.builder()
                 .data(diagnosticsService.predict(anamnesisDto))
                 .build());

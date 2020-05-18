@@ -89,7 +89,8 @@ public class SymptomServiceImpl implements CrudService<Symptom>, ImportService {
             while ((row = buffReader.readLine()) != null) {
                 // String[] data = row.split(","); // multi-column
                 // do something with the data
-                String code = row.replace(" ", "_");
+                String code = row;
+                        // row.replace(" ", "_");
                 String name = StringUtils.capitalize(row.substring(14));
 
                 symptoms.add(Symptom.builder()

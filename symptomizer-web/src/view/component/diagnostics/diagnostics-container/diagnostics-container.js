@@ -14,7 +14,8 @@ class DiagnosticsContainer extends React.Component{
 
         this.state = {
             anamnesis: {
-                symptomIds: []
+                symptomIds: [],
+                symptomCodes: [],
             },
             currentStep: 0,
             stepNum: 4
@@ -53,15 +54,18 @@ class DiagnosticsContainer extends React.Component{
     addSymptom = (symptom, checked) => {
         if (symptom) {
             const anamnesis = this.state.anamnesis;
-            let symptomIds = anamnesis.symptomIds;
+            let symptomIds = anamnesis.symptomIds,
+                symptomCodes = anamnesis.symptomCodes;
 
             if (checked) {
                 symptomIds.push(symptom.id);
+                symptomCodes.push(symptom.code);
             } else {
-                symptomIds.splice(symptomIds.findIndex(id => id === symptom.id), 1)
+                symptomIds.splice(symptomIds.findIndex(id => id === symptom.id), 1);
+                symptomCodes.splice(symptomCodes.findIndex(code => code === symptom.code), 1);
             }
 
-            let newAnamnesis = { ...anamnesis, symptomIds };
+            let newAnamnesis = { ...anamnesis, symptomIds, symptomCodes };
             this.setState({ anamnesis: newAnamnesis });
         }
     };
