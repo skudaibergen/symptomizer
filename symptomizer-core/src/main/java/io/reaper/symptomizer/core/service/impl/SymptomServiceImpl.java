@@ -6,9 +6,12 @@ import io.reaper.symptomizer.core.repo.NativeRepo;
 import io.reaper.symptomizer.core.repo.SymptomRepo;
 import io.reaper.symptomizer.core.service.CrudService;
 import io.reaper.symptomizer.core.service.ImportService;
+import io.reaper.symptomizer.core.service.PageService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,7 +26,7 @@ import java.util.List;
  */
 @Slf4j
 @Service
-public class SymptomServiceImpl implements CrudService<Symptom>, ImportService {
+public class SymptomServiceImpl implements CrudService<Symptom>, ImportService, PageService<Symptom> {
 
     private final SymptomRepo symptomRepo;
     private final NativeRepo symptomNativeRepo;
@@ -87,15 +90,17 @@ public class SymptomServiceImpl implements CrudService<Symptom>, ImportService {
             symptoms = new ArrayList<>();
 
             while ((row = buffReader.readLine()) != null) {
-                // String[] data = row.split(","); // multi-column
-                // do something with the data
-                String code = row;
+                String[] cols = row.split(","); // multi-column
+
+                String code = cols[0];
                         // row.replace(" ", "_");
-                String name = StringUtils.capitalize(row.substring(14));
+                String name = StringUtils.capitalize(code.substring(14));
+                String nameRu = cols.length > 1 ? cols[1] : name;
 
                 symptoms.add(Symptom.builder()
                         .code(code)
                         .name(name)
+                        .nameRu(nameRu)
                         .build());
             }
         }
@@ -116,4 +121,13 @@ public class SymptomServiceImpl implements CrudService<Symptom>, ImportService {
                 .build();
     }
 
+    @Override
+    public byte[] exportToFile() throws IOException {
+        return new byte[0];
+    }
+
+    @Override
+    public Page<Symptom> findAll(Pageable pageable) {
+        return symptomRepo.findAll(pageable);
+    }
 }

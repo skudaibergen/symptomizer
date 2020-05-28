@@ -27,4 +27,7 @@ public class Disease extends BaseEntity {
     @Column(name = "_name", nullable = false)
     private String name;
 
+    @Column(name = "_name_ru", nullable = false)
+    private String nameRu;
+
 }

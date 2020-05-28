@@ -27,6 +27,9 @@ public class Symptom extends BaseEntity {
     @Column(name = "_name", nullable = false)
     private String name;
 
+    @Column(name = "_name_ru ", nullable = false)
+    private String nameRu;
+
     @Column(name = "_group_id")
     private Long groupId;
 

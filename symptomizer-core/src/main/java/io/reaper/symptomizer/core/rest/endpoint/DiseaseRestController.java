@@ -4,7 +4,10 @@ import io.reaper.symptomizer.core.model.dto.ResponseDto;
 import io.reaper.symptomizer.core.model.entity.Disease;
 import io.reaper.symptomizer.core.service.CrudService;
 import io.reaper.symptomizer.core.service.ImportService;
+import io.reaper.symptomizer.core.service.PageService;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,18 +21,21 @@ import org.springframework.web.multipart.MultipartFile;
 public class DiseaseRestController {
 
     private final CrudService<Disease> diseaseCrudService;
+    private final PageService<Disease> diseasePageService;
     private final ImportService importService;
 
     public DiseaseRestController(@Qualifier("diseaseServiceImpl") CrudService<Disease> diseaseCrudService,
+                                 @Qualifier("diseaseServiceImpl") PageService<Disease> diseasePageService,
                                  @Qualifier("diseaseServiceImpl") ImportService importService) {
         this.diseaseCrudService = diseaseCrudService;
+        this.diseasePageService = diseasePageService;
         this.importService = importService;
     }
 
     @GetMapping("")
-    public ResponseEntity<ResponseDto<?>> findAll() {
+    public ResponseEntity<ResponseDto<?>> findAll(@PageableDefault Pageable pageable) {
         return ResponseEntity.ok(ResponseDto.builder()
-                .data(diseaseCrudService.findAll())
+                .data(diseasePageService.findAll(pageable))
                 .build());
     }
 

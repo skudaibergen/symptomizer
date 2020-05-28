@@ -20,4 +20,6 @@ public interface ImportService {
 
     ReportDto importFromFile(MultipartFile file) throws IOException;
 
+    byte[] exportToFile() throws IOException;
+
 }
