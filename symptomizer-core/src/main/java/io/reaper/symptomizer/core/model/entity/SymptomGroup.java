@@ -19,9 +19,6 @@ import javax.persistence.Table;
 @EqualsAndHashCode(callSuper = true)
 public class SymptomGroup extends BaseEntity {
 
-    @Column(name = "_code", nullable = false)
-    private String code;
-
     @Column(name = "_name", nullable = false)
     private String name;
 

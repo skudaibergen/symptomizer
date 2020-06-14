@@ -23,13 +23,11 @@ class DiseasePredictionHandler(RequestHandler):
         if self.request.headers['Content-Type'] == 'application/json':
             body = json_decode(self.request.body)
             analyzer = SymptomAnalyzer(body['symptomCodes'])
-            prediction = analyzer.predict()
+            prediction = analyzer.predict_v2()
             self.write({
                 'status': 'success',
                 'data': {
-                    'predictedDisease': {
-                        'code': prediction
-                    }
+                    'predictedDisease': prediction
                 }
             })
         else:

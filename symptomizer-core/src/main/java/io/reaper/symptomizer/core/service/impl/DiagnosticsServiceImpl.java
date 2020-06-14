@@ -33,6 +33,7 @@ public class DiagnosticsServiceImpl implements DiagnosticsService {
 
         return DiagnosisDto.builder()
                 .predictedDisease(diseaseRepo.findByCode(response.getData().getPredictedDisease().getCode()))
+//                .questions()
                 .build();
     }
 

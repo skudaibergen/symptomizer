@@ -34,9 +34,10 @@ public class ResponseDto<D> {
                     page.getSize(),
                     page.getNumber()
             );
+            this.data = (D) page.getContent();
+        } else {
+            this.data = data;
         }
-
-        this.data = data;
     }
 
     @Data

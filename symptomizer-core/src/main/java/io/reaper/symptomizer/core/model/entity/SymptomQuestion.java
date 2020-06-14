@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  *
@@ -21,5 +22,8 @@ public class SymptomQuestion extends BaseEntity {
 
     @Column(name = "_name", nullable = false)
     private String name;
+
+    @Transient
+    private transient Boolean positive;
 
 }

@@ -13,7 +13,7 @@ function DiagnosticsSymptomsInput({ symptomsMap, addSymptom }) {
                     <div key={key} className="card col-md-3 mr-4 ml-4">
                         <div className="card-body">
                             <div className="form-group">
-                                <label className="form-control-label">
+                                <label className="text-primary form-control-label">
                                     {key} <br/>
                                     {/*<small className="text-primary">Custom elements</small>*/}
                                 </label>

@@ -75,13 +75,19 @@ class DiagnosticsPage extends React.Component {
 
                     <div className="content-inner">
                         <InnerHeader title={'Diagnostics'} />
-                        {   loading ?
-                            <LoaderMaterial className="mt-5" loading={loading}/> :
-                            <DiagnosticsContainer submit={this.submit}
-                                                  symptomsMap={symptomsMap}
-                                                  symptomQuestions={symptomQuestions}
-                                                  predictionResult={predictionResult} />
-                        }
+
+                        <section className="">
+                            <div className="container-fluid">
+                                {   loading ?
+                                    <LoaderMaterial className="mt-5" loading={loading}/> :
+                                    <DiagnosticsContainer submit={this.submit}
+                                                          symptomsMap={symptomsMap}
+                                                          symptomQuestions={symptomQuestions}
+                                                          predictionResult={predictionResult} />
+                                }
+                            </div>
+                        </section>
+
                         <Footer />
                     </div>
                 </div>
