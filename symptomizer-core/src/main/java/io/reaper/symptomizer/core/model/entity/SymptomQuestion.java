@@ -24,6 +24,12 @@ public class SymptomQuestion extends BaseEntity {
     private String name;
 
     @Transient
-    private transient Boolean positive;
+    private transient Long symptomId;
+
+    @Transient
+    private transient String symptomCode;
+
+    @Transient
+    private transient boolean positive;
 
 }

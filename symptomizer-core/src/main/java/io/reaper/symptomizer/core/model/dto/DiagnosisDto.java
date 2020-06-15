@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -23,6 +24,10 @@ public class DiagnosisDto {
 
     private Disease predictedDisease;
 
+    private Map<String, Float> closestPreds;
+
     private List<SymptomQuestion> questions;
+
+    private int tryNum;
 
 }

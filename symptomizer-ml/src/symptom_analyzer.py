@@ -93,9 +93,9 @@ class SymptomAnalyzer:
         # FIXME: temporary solution
         found_disease_code = all_diseases[all_diseases['Code'].str.contains(predicted[0])].iloc[0]['Code']
 
-        keys = pred_proba[0][max_inds]
-        vals = y[max_inds].tolist()
-        vals = [all_diseases[all_diseases['Code'].str.contains(v)].iloc[0]['Code'] for v in vals]
+        vals = pred_proba[0][max_inds]
+        keys = y[max_inds].tolist()
+        keys = [all_diseases[all_diseases['Code'].str.contains(v)].iloc[0]['Code'] for v in keys]
 
         pred_key_val = dict(zip(keys, vals))
         print('pred_key_val', pred_key_val)

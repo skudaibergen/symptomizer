@@ -12,6 +12,23 @@ function DiagnosticsResultCard({ predictionResult }) {
                     <span className="text-primary">{predictionResult.predictedDisease.name}</span>
                     {/*- {predictionResult.predictedDisease.description}*/}
                 </div>
+
+                {
+                    predictionResult.closestPreds ?
+
+                        <div className="col-lg-12 mt-3">
+                            <h4>Other possibilities:</h4>
+                            <ul>
+                                {
+                                    Object.keys(predictionResult.closestPreds)
+                                        .map((name, idx) => <li key={name + idx}><span className="text-primary">{name}</span></li>)
+                                }
+                            </ul>
+                        </div>
+
+                        : null
+                }
+
                 <div className="col-lg-12 mt-4">
                     <h4>Suggestions:</h4>
                     <span>Please contact your local emergency</span>

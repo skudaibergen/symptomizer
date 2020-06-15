@@ -18,18 +18,20 @@ class DiagnosticsPage extends React.Component {
             symptomsMap: null,
             symptomQuestions: null,
             predictionResult: null,
-            loading: true
+            loading: true,
+            currentStep: 0,
+            anamnesis: null
         };
     }
 
     componentDidMount() {
         this.getSymptoms()
-            .then(this.getQuestions())
             .then(this.setState({ loading: false }));
     }
 
-    submit = anamnesis => {
-        this.setState({ loading: true });
+    submit = (anamnesis, currentStep) => {
+        anamnesis.tryNum = anamnesis.tryNum ? anamnesis.tryNum + 1 : 1;
+        this.setState({ loading: true, currentStep, anamnesis });
 
         api.predictDiagnosis(anamnesis)
             .then(res => res.data)
@@ -37,17 +39,6 @@ class DiagnosticsPage extends React.Component {
                 if (body.status === 'success') this.setState({ loading: false, predictionResult: body.data });
                 else throw new Error(`Api status was ${body.status}`);
             })
-            .catch(err => console.error(err));
-    };
-
-    getQuestions = () => {
-        return api.fetchQuestions()
-            .then(res => res.data)
-            .then(body => {
-                if (body.status === 'success') return body.data;
-                else throw new Error(`Api status was ${body.status}`);
-            })
-            .then(symptomQuestions => this.setState({ symptomQuestions }))
             .catch(err => console.error(err));
     };
 
@@ -63,7 +54,7 @@ class DiagnosticsPage extends React.Component {
     };
 
     render() {
-        const { symptomsMap, predictionResult, loading, symptomQuestions } = this.state;
+        const { symptomsMap, predictionResult, loading, anamnesis, currentStep } = this.state;
 
         return (
             <div className="page">
@@ -82,8 +73,9 @@ class DiagnosticsPage extends React.Component {
                                     <LoaderMaterial className="mt-5" loading={loading}/> :
                                     <DiagnosticsContainer submit={this.submit}
                                                           symptomsMap={symptomsMap}
-                                                          symptomQuestions={symptomQuestions}
-                                                          predictionResult={predictionResult} />
+                                                          anamnesis={anamnesis}
+                                                          predictionResult={predictionResult}
+                                                          currentStep={currentStep}/>
                                 }
                             </div>
                         </section>

@@ -23,13 +23,16 @@ public class DiseaseRestController {
     private final CrudService<Disease> diseaseCrudService;
     private final PageService<Disease> diseasePageService;
     private final ImportService importService;
+    private final ImportService diseaseSymptomImportService;
 
     public DiseaseRestController(@Qualifier("diseaseServiceImpl") CrudService<Disease> diseaseCrudService,
                                  @Qualifier("diseaseServiceImpl") PageService<Disease> diseasePageService,
-                                 @Qualifier("diseaseServiceImpl") ImportService importService) {
+                                 @Qualifier("diseaseServiceImpl") ImportService importService,
+                                 @Qualifier("diseaseSymptomAssocServiceImpl") ImportService diseaseSymptomImportService) {
         this.diseaseCrudService = diseaseCrudService;
         this.diseasePageService = diseasePageService;
         this.importService = importService;
+        this.diseaseSymptomImportService = diseaseSymptomImportService;
     }
 
     @GetMapping("")
@@ -53,4 +56,10 @@ public class DiseaseRestController {
                 .build());
     }
 
+    @PostMapping("/symptoms/import")
+    public ResponseEntity<ResponseDto<?>> saveAssociations(@RequestBody MultipartFile uploadFile) throws Exception {
+        return ResponseEntity.ok(ResponseDto.builder()
+                .data(diseaseSymptomImportService.importFromFile(uploadFile))
+                .build());
+    }
 }

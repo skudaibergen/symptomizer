@@ -26,5 +26,6 @@ public class AnamnesisDto {
     private List<Symptom> symptoms;
     private List<Long> symptomIds;
     private List<String> symptomCodes;
+    private int tryNum;
 
 }

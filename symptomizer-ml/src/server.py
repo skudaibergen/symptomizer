@@ -27,7 +27,11 @@ class DiseasePredictionHandler(RequestHandler):
             self.write({
                 'status': 'success',
                 'data': {
-                    'predictedDisease': prediction
+                    'predictedDisease': {
+                        'code': prediction['code'],
+                        'proba': prediction['proba']
+                    },
+                    'closestPreds': prediction['closestPreds']
                 }
             })
         else:
